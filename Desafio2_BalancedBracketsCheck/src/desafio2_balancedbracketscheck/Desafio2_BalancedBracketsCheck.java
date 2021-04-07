@@ -7,12 +7,8 @@ package desafio2_balancedbracketscheck;
 
 import java.util.*;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.Stack;
 
 
 /**
@@ -25,7 +21,7 @@ public class Desafio2_BalancedBracketsCheck {
      * @param args the command line arguments
      */
         
-    static boolean areBracketsBalanced(String expr)  throws Exception
+    static boolean BracketsBalanced(String expr)  throws Exception
     {
         Deque<Character> pilha = new ArrayDeque<>();
  
@@ -69,9 +65,10 @@ public class Desafio2_BalancedBracketsCheck {
     public static void main(String[] args) throws Exception 
     {        
       
-        File arq = new File("Entrada.txt");        
-        ArrayList<String> entrada = new ArrayList<>();
+        File arq = new File("Entrada.txt"); 
         StringBuilder construtor = new StringBuilder();
+        ArrayList<String> entrada = new ArrayList<>();
+        
         
         if (arq.exists()) 
         {
@@ -83,13 +80,22 @@ public class Desafio2_BalancedBracketsCheck {
             }            
         }
         
-        arq = new File("SaidaValidada.txt");
-                arq.createNewFile();
-                try (FileWriter script = new FileWriter("SaidaValidada.txt")) {
-                    script.write(construtor.toString());
+        for (String s : entrada)
+            {
+                construtor.append(s);
+                if (BracketsBalanced(s.trim()))
+                {                    
+                    construtor.append(" - Válido");                    
                 }
-                System.out.print(construtor.toString());
-                System.out.println("\nArquivo Validado criado");
+                else
+                {
+                    construtor.append(" - Inválido");
+                }
+                construtor.append(System.lineSeparator());
+            }
+        
+            System.out.print(construtor.toString());               
+                
     }
    
 }
